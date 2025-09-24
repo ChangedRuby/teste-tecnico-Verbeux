@@ -1,34 +1,16 @@
-# Teste técnico
-Desafio Técnico para Estagiário Desenvolvedor na Verboo
+# React + Vite
 
-# Contexto
-Você é um desenvolvedor em uma multinacional do setor alimentício. Recentemente, temos recebido um volume crescente de feedback dos clientes — tanto elogios quanto reclamações — sobre nossas franquias. Atualmente, não temos uma maneira eficiente de centralizar e analisar essas informações, o que impede nossa capacidade de responder de forma proativa e informada.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-# Objetivo
-Desenvolver um Assistente usando a plataforma verboo que funcione como um canal centralizado de comunicação para coletar, organizar e analisar o feedback dos clientes sobre as franquias. O Assistente deve ser capaz de diferenciar e categorizar automaticamente elogios de reclamações, e disponibilizar essas informações de maneira estruturada para análise posterior.
+Currently, two official plugins are available:
 
-# Requisitos Técnicos:
-- Utilize a plataforma verboo para desenvolver o Assistente.
-- Utilize [gatilhos](https://docs.verbeux.com.br/docs/generative-trigger) para permitir que o Assistente utilize como ferramenta de resposta. 
-- O código deve ser escrito em uma das seguintes linguagens: JavaScript, Go ou Python. O uso de frameworks é permitido e encorajado.
-- Todo o código deve ser escrito em inglês.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-Entregáveis:
-- Código-fonte completo hospedado em um repositório Git público (por exemplo, GitHub).
-- Documentação em README.md explicando como executar o projeto e uma breve descrição das funcionalidades implementadas.
-- `Opcional` Uma demonstração em vídeo do Assistente em funcionamento.
+## React Compiler
 
-Critérios de Avaliação:
-1. Execução: O projeto deve ser funcional e fácil de iniciar e testar.
-2. Completitude: A solução deve atender a todos os requisitos funcionais descritos.
-3. Qualidade do Código: O código deve ser limpo, bem organizado e seguir boas práticas de programação.
+The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-Links:
-- [https://docs.verbeux.com.br](https://docs.verbeux.com.br/docs/generative)
-- [https://verboo.ai](https://verboo.ai)
-- [https://verboo.ai/lab](https://verboo.ai/lab)
+## Expanding the ESLint configuration
 
-# Dica
-Ao abordar este desafio, lembre-se de que há múltiplas maneiras de conceber uma solução eficaz. Uma abordagem possível é desenvolver um back-end que atue como um armazenamento de mensagens, capturando e armazenando elogios e reclamações em um banco de dados. Alternativamente, você poderia criar uma interface de usuário (front-end) que se integre ao Assistente, facilitando a interação direta entre o usuário e o sistema, exibindo perguntas e respostas em tempo real.
-
-Entretanto, encorajamos você a pensar além dessas sugestões e explorar soluções criativas e inovadoras. Não há limites estritos para como você deve resolver este problema — busque o caminho que você acredita ser o mais eficiente e eficaz para atingir os objetivos do projeto. Sua criatividade e habilidade de inovar são tão importantes quanto suas habilidades técnicas. Boa sorte! 
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
