@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import './style.css'
 import Trash from '../../assets/react.svg'
 import handleFeedback from '../../services/feedbackService.js'
@@ -6,6 +6,8 @@ import handleFeedback from '../../services/feedbackService.js'
 function Home() {
 
   const [messages, setMessages] = useState([]);
+
+  const inputMessage = useRef();
 
   async function sendFeedback(msg) {
     const post = {
@@ -19,23 +21,27 @@ function Home() {
 
     try {
       const response = await handleFeedback(post);
-      console.log(response.response[0].data);
+      setMessages(response.response[0].data);
     } catch(err){
       console.log(err);
     }
   }
 
   useEffect(() => {
-    sendFeedback();
+    // sendFeedback("hello");
   }, [])
+
+  useEffect(() => {
+    console.log(messages);
+  }, [messages])
 
 
   return (
     <div className='container'>
       <form>
         <h1>Sugerir Feedback</h1>
-        <input name='mensagem' type='text' placeholder='Message'></input>
-        <button type='button'>Enviar</button>
+        <input name='mensagem' type='text' placeholder='Message' ref={inputMessage}></input>
+        <button type='button' onClick={() => sendFeedback(inputMessage.current.value)}>Enviar</button>
       </form>
 
       <div className='cardMsg'>
