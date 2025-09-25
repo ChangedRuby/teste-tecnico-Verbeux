@@ -10,11 +10,10 @@ h1 {
   font-size: 32px;
 }
 
-.form {
+form {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  text-align: center;
   padding: 30px;
   border-radius: 10px;
   background-color: #2E2D4E;
