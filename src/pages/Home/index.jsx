@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './style.css'
-import createSession from '../../services/sessionService.js'
+import { createSession, sendMsgToSession } from '../../services/sessionService.js'
 
 function Home() {
 

@@ -1,13 +1,21 @@
 import axios from 'axios'
 
-const createSession = async (sessionData) => {
+export const createSession = async (sessionData) => {
     try {
         const response = await axios.post('/api/postSession', sessionData);
 
         return response.data;
     } catch(err){
-        console.error('Erro ao enviar mensagem');
+        console.error('Error when creating session', err);
     }
 }
 
-export default createSession;
+export const sendMsgToSession = async (sessionData) => {
+    try {
+        const response = await axios.put('/api/putSession', sessionData);
+
+        return response.data;
+    } catch(err){
+        console.error('Error when sending message', err);
+    }
+}

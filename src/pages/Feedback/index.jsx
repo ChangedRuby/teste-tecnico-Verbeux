@@ -2,8 +2,8 @@ import { useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import './style.css'
 import Trash from '../../assets/react.svg'
-import handleFeedback from '../../services/feedbackService.js'
-import createSession from '../../services/sessionService.js'
+import handleFeedback from '../../services/oneshotService.js'
+import { createSession, sendMsgToSession } from '../../services/sessionService.js'
 
 function FeedbackPage() {
 
@@ -16,11 +16,21 @@ function FeedbackPage() {
   console.log(receivedData);
 
   const sessionID = receivedData.id;
+  console.log(sessionID);
 
   async function sendFeedback(msg) {
+    // Post para chamada api oneshot
+    // const post = {
+    //   'message': msg,
+    //   'assistant_id': '945',
+    //   'ignore_trigger_response': 'false',
+    //   'force_trigger_call': 'false',
+    //   'client_data': '{}',
+    //   'channel': 'API',
+    // }
+
     const post = {
       'message': msg,
-      'assistant_id': '945',
       'ignore_trigger_response': 'false',
       'force_trigger_call': 'false',
       'client_data': '{}',
@@ -28,8 +38,9 @@ function FeedbackPage() {
     }
 
     try {
-      const response = await handleFeedback(post);
-      setMessages(messages => [...messages, response]);
+      const response = await sendMsgToSession(post);
+      console.log(response);
+      // setMessages(messages => [...messages, response]);
     } catch (err) {
       console.log(err);
     }
