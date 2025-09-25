@@ -31,6 +31,7 @@ function FeedbackPage() {
 
     const post = {
       'message': msg,
+      'sessionID': sessionID,
       'ignore_trigger_response': 'false',
       'force_trigger_call': 'false',
       'client_data': '{}',

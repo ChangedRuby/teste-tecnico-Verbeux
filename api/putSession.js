@@ -6,7 +6,7 @@ async function handler(req, res){
     }
     
     try {
-        const externalApiUrl = 'https://generative-api.verbeux.com.br/session/7b2f5903-8354-4146-af7e-1ffdf750434b';
+        const externalApiUrl = `https://generative-api.verbeux.com.br/session/${req.body.sessionID}`;
         
         const apiResponse = await axios.put(externalApiUrl, req.body, {
             headers: {
