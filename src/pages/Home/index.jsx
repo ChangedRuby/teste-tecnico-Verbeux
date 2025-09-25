@@ -21,8 +21,8 @@ function Home() {
 
     try {
       const response = await handleFeedback(post);
-      setMessages(response.response[0].data);
-    } catch(err){
+      setMessages(messages => [...messages, response]);
+    } catch (err) {
       console.log(err);
     }
   }
@@ -32,7 +32,9 @@ function Home() {
   }, [])
 
   useEffect(() => {
-    console.log(messages);
+    messages.forEach((msg) => {
+      console.log(msg);
+    })
   }, [messages])
 
 
@@ -44,15 +46,21 @@ function Home() {
         <button type='button' onClick={() => sendFeedback(inputMessage.current.value)}>Enviar</button>
       </form>
 
-      <div className='cardMsg'>
-        <div>
-          <p>Mensagem: </p>
-          <p></p>
+      {messages.map((msg) => (
+        <div key={msg.id} className='cardMsg'>
+          <div>
+            <p>Mensagem: </p>
+            {msg.response.map((singleData, i) => {
+              if(singleData.type == "text"){
+                return <p key={i}>{singleData.data}</p>;
+              }
+            })}
+          </div>
+          <button>
+            <img src={Trash} />
+          </button>
         </div>
-        <button>
-          <img src={Trash} />
-        </button>
-      </div>
+      ))}
     </div>
   )
 }
