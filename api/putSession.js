@@ -10,7 +10,7 @@ async function handler(req, res){
         
         const apiResponse = await axios.put(externalApiUrl, req.body, {
             headers: {
-                'Api-Key': '77fb6a79-6873-49d8-bbea-6f11b3a99be0',
+                'Api-Key': process.env.API_KEY,
                 'accept': 'application/json', 
                 'Content-Type': 'multipart/form-data', 
             },

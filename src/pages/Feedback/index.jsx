@@ -41,7 +41,7 @@ function FeedbackPage() {
     try {
       const response = await sendMsgToSession(post);
       console.log(response);
-      // setMessages(messages => [...messages, response]);
+      setMessages(messages => [...messages, response]);
     } catch (err) {
       console.log(err);
     }
