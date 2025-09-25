@@ -1,19 +1,21 @@
 import { useEffect, useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom';
 import './style.css'
-import Trash from '../../assets/react.svg'
-import handleFeedback from '../../services/feedbackService.js'
 import createSession from '../../services/sessionService.js'
 
 function Home() {
 
-  async function handleCreateSession(){
+  const navigate = useNavigate();
+
+  async function handleCreateSession() {
     const post = {
       'assistant_id': 945,
     }
 
     try {
       const response = await createSession(post);
-      console.log(response);
+
+      navigate('/give-feedback', { state: { responseData: response } });
     } catch (err) {
       console.log(err);
     }

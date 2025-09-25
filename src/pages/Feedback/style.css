@@ -46,6 +46,11 @@ form {
     font-size: 16px;
     outline: 10px;
   }
+
+  & p {
+    color: #fff;
+    font-size: 8px;
+  }
 }
 
 .messageCard {
