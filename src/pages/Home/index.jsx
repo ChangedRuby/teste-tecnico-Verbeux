@@ -47,9 +47,15 @@ function Home() {
       </form>
 
       {messages.map((msg) => (
-        <div key={msg.id} className='cardMsg'>
+        <div key={msg.id} className='messageCard'>
           <div>
-            <p>Mensagem: </p>
+            {msg.response.map((singleData, i) => {
+              if(singleData.type == "imageV2"){
+                return <img key={i} src={singleData.data.url}></img>;
+              }
+            })}
+          </div>
+          <div>
             {msg.response.map((singleData, i) => {
               if(singleData.type == "text"){
                 return <p key={i}>{singleData.data}</p>;
