@@ -38,18 +38,10 @@ function FeedbackPage() {
         content: 'string'
       }]
     }
-
-
-
-
-
-
-
-
-
   */
 
 
+    
 
   function formatSingleMessageResponse(apiResponse) {
     const messageParts = apiResponse.response.map((part) => {
