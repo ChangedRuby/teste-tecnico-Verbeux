@@ -33,10 +33,10 @@ function FeedbackPage() {
     {
       id: 'string',
       role: 'string',
-      parts: {
+      parts: [{
         type: 'string'
         content: 'string'
-      }
+      }]
     }
 
 
@@ -57,7 +57,7 @@ function FeedbackPage() {
         return { type: 'text', content: part.data }
       }
 
-      if(part.type == 'imageV2'){
+      if (part.type == 'imageV2') {
         return { type: 'imageV2', content: part.data.url }
       }
 
@@ -74,7 +74,7 @@ function FeedbackPage() {
   }
 
   function formatHistoryResponse(apiResponse) {
-    const turnParts = apiResponse.current_conversation.map((turn) => {
+    const historyParts = apiResponse.current_conversation.map((turn) => {
       console.log(turn);
       if (turn.role == 'human') {
 
@@ -88,7 +88,6 @@ function FeedbackPage() {
           parts: messageParts,
         }
         // console.log(formatedData);
-        setMessages(messages => [...messages, formatedData]);
         return formatedData;
 
       }
@@ -96,9 +95,13 @@ function FeedbackPage() {
       if (turn.role == 'ai') {
 
         const messageParts = turn.content.map((part) => {
-          if(part.type=='function'){
+          console.log("TYPE: " + part.type);
+          if (part.type == 'function') {
             return { type: 'text', content: 'Registered feedback' }; // retorna se o turn.content possui o parametro arguments, que é a resposta do gatilho que a api respondeu
-          } else{
+          } else {
+            if (part.type) {
+              return null;
+            }
             return { type: 'text', content: part.text }
           }
         });
@@ -109,13 +112,12 @@ function FeedbackPage() {
           parts: messageParts,
         }
         // console.log(formatedData);
-        setMessages(messages => [...messages, formatedData]);
         return formatedData;
 
       }
-    });
+    }).filter(Boolean);
 
-    return apiResponse;
+    return historyParts;
   }
 
 
@@ -149,9 +151,17 @@ function FeedbackPage() {
       const response = await sendMsgToSession(post);
       if (response) {
         const formatedResponse = formatSingleMessageResponse(response);
-        console.log(response);
-        setMessages(messages => [...messages, formatedResponse]);
-        console.log(formatedResponse);
+
+        const userMessage = {
+          id: response.id,
+          role: 'human',
+          parts: [{
+            type: 'text',
+            content: msg,
+          }]
+        }
+
+        setMessages(messages => [...messages, userMessage, formatedResponse]);
       }
     } catch (err) {
       console.log(err);
@@ -162,6 +172,12 @@ function FeedbackPage() {
 
     try {
       const response = await retrieveSession(id);
+      const formatedHistory = formatHistoryResponse(response);
+
+      setMessages(messages => []);
+      formatedHistory.map((item, i) => {
+        setMessages(messages => [...messages, item]);
+      })
 
       // response.forEach((msg, i) => {
 
@@ -169,7 +185,7 @@ function FeedbackPage() {
 
       // setMessages(messages => [...messages, response.current_conversation[0].content[0].text]);
       console.log(response);
-      console.log("Formated history: " + formatHistoryResponse(response));
+      console.log("Formated history: " + formatedHistory);
     } catch (err) {
       console.log(err);
     }
@@ -195,24 +211,27 @@ function FeedbackPage() {
         <p>Chat criado com id: {sessionID}</p>
       </form>
 
-      {messages.map((msg, i) => (
-        <div key={i} className='messageCard'>
-          <div>
-            {msg.parts.map((singleData, i) => {
-              if (singleData.type == "imageV2") {
-                return <img key={i} src={singleData.content}></img>;
-              }
-            })}
+      <div className='messagesHolder'>
+        <h1>Conversa</h1>
+        {messages.map((msg, i) => (
+          <div key={i} className='messageCard'>
+            <div>
+              {msg.parts.map((singleData, i) => {
+                if (singleData.type == "imageV2") {
+                  return <img key={i} src={singleData.content}></img>;
+                }
+              })}
+            </div>
+            <div>
+              {msg.parts.map((singleData, i) => {
+                if (singleData.type == "text") {
+                  return <p key={i}>{singleData.content}</p>;
+                }
+              })}
+            </div>
           </div>
-          <div>
-            {msg.parts.map((singleData, i) => {
-              if (singleData.type == "text") {
-                return <p key={i}>{singleData.content}</p>;
-              }
-            })}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }
