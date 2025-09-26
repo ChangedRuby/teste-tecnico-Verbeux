@@ -13,7 +13,7 @@ function FeedbackPage() {
   const location = useLocation();
 
   const receivedData = location.state?.responseData;
-  console.log("Received data: "+receivedData);
+  console.log("Received data: " + receivedData);
 
   var sessionID;
 
@@ -23,7 +23,107 @@ function FeedbackPage() {
   // } else{
   //   sessionID = 'c142633c-3ff0-4a3f-8668-7ce87f02cf8c';
   // }
-  console.log("SessionID: "+sessionID);
+  console.log("SessionID: " + sessionID);
+
+
+
+
+  /*
+    HOW THE FRONTEND READS MESSAGE JSON:
+    {
+      id: 'string',
+      role: 'string',
+      parts: {
+        type: 'string'
+        content: 'string'
+      }
+    }
+
+
+
+
+
+
+
+
+
+  */
+
+
+
+  function formatSingleMessageResponse(apiResponse) {
+    const messageParts = apiResponse.response.map((part) => {
+      if (part.type == 'text') {
+        return { type: 'text', content: part.data }
+      }
+
+      if(part.type == 'imageV2'){
+        return { type: 'imageV2', content: part.data.url }
+      }
+
+      return null;
+    }).filter(Boolean);
+
+    console.log(messageParts);
+
+    return {
+      id: apiResponse.id,
+      role: 'assistant',
+      parts: messageParts,
+    }
+  }
+
+  function formatHistoryResponse(apiResponse) {
+    const turnParts = apiResponse.current_conversation.map((turn) => {
+      console.log(turn);
+      if (turn.role == 'human') {
+
+        const messageParts = turn.content.map((part) => {
+          return { type: 'text', content: part.text }
+        });
+
+        const formatedData = {
+          id: turn.id,
+          role: 'human',
+          parts: messageParts,
+        }
+        // console.log(formatedData);
+        setMessages(messages => [...messages, formatedData]);
+        return formatedData;
+
+      }
+
+      if (turn.role == 'ai') {
+
+        const messageParts = turn.content.map((part) => {
+          if(part.type=='function'){
+            return { type: 'text', content: 'Registered feedback' }; // retorna se o turn.content possui o parametro arguments, que é a resposta do gatilho que a api respondeu
+          } else{
+            return { type: 'text', content: part.text }
+          }
+        });
+
+        const formatedData = {
+          id: turn.id,
+          role: 'ai',
+          parts: messageParts,
+        }
+        // console.log(formatedData);
+        setMessages(messages => [...messages, formatedData]);
+        return formatedData;
+
+      }
+    });
+
+    return apiResponse;
+  }
+
+
+
+
+
+
+
 
   async function sendFeedback(msg) {
     // Post para chamada api oneshot
@@ -47,9 +147,11 @@ function FeedbackPage() {
 
     try {
       const response = await sendMsgToSession(post);
-      if(response){
+      if (response) {
+        const formatedResponse = formatSingleMessageResponse(response);
         console.log(response);
-        setMessages(messages => [...messages, response]);
+        setMessages(messages => [...messages, formatedResponse]);
+        console.log(formatedResponse);
       }
     } catch (err) {
       console.log(err);
@@ -60,7 +162,14 @@ function FeedbackPage() {
 
     try {
       const response = await retrieveSession(id);
+
+      // response.forEach((msg, i) => {
+
+      // })
+
+      // setMessages(messages => [...messages, response.current_conversation[0].content[0].text]);
       console.log(response);
+      console.log("Formated history: " + formatHistoryResponse(response));
     } catch (err) {
       console.log(err);
     }
@@ -71,9 +180,9 @@ function FeedbackPage() {
   }, [])
 
   useEffect(() => {
-    messages.forEach((msg) => {
-      console.log(msg);
-    })
+    // messages.forEach((msg) => {
+    //   console.log(msg);
+    // })
   }, [messages])
 
 
@@ -89,22 +198,19 @@ function FeedbackPage() {
       {messages.map((msg, i) => (
         <div key={i} className='messageCard'>
           <div>
-            {msg.response.map((singleData, i) => {
+            {msg.parts.map((singleData, i) => {
               if (singleData.type == "imageV2") {
-                return <img key={i} src={singleData.data.url}></img>;
+                return <img key={i} src={singleData.content}></img>;
               }
             })}
           </div>
           <div>
-            {msg.response.map((singleData, i) => {
+            {msg.parts.map((singleData, i) => {
               if (singleData.type == "text") {
-                return <p key={i}>{singleData.data}</p>;
+                return <p key={i}>{singleData.content}</p>;
               }
             })}
           </div>
-          <button>
-            <img src={Trash} />
-          </button>
         </div>
       ))}
     </div>
