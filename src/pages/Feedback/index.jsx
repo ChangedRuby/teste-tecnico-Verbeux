@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import './style.css'
 import Trash from '../../assets/react.svg'
 import handleFeedback from '../../services/oneshotService.js'
-import { createSession, sendMsgToSession } from '../../services/sessionService.js'
+import { createSession, sendMsgToSession, retrieveSession } from '../../services/sessionService.js'
 
 function FeedbackPage() {
 
@@ -13,10 +13,17 @@ function FeedbackPage() {
   const location = useLocation();
 
   const receivedData = location.state?.responseData;
-  console.log(receivedData);
+  console.log("Received data: "+receivedData);
 
-  const sessionID = receivedData.id;
-  console.log(sessionID);
+  var sessionID;
+
+  sessionID = receivedData.id;
+  // if(receivedData){
+  //   sessionID = receivedData.id;
+  // } else{
+  //   sessionID = 'c142633c-3ff0-4a3f-8668-7ce87f02cf8c';
+  // }
+  console.log("SessionID: "+sessionID);
 
   async function sendFeedback(msg) {
     // Post para chamada api oneshot
@@ -40,15 +47,27 @@ function FeedbackPage() {
 
     try {
       const response = await sendMsgToSession(post);
+      if(response){
+        console.log(response);
+        setMessages(messages => [...messages, response]);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function handleSession(id) {
+
+    try {
+      const response = await retrieveSession(id);
       console.log(response);
-      setMessages(messages => [...messages, response]);
     } catch (err) {
       console.log(err);
     }
   }
 
   useEffect(() => {
-    // handleCreateSession();
+    handleSession(sessionID);
   }, [])
 
   useEffect(() => {
@@ -67,8 +86,8 @@ function FeedbackPage() {
         <p>Chat criado com id: {sessionID}</p>
       </form>
 
-      {messages.map((msg) => (
-        <div key={msg.id} className='messageCard'>
+      {messages.map((msg, i) => (
+        <div key={i} className='messageCard'>
           <div>
             {msg.response.map((singleData, i) => {
               if (singleData.type == "imageV2") {

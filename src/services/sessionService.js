@@ -19,3 +19,13 @@ export const sendMsgToSession = async (sessionData) => {
         console.error('Error when sending message', err);
     }
 }
+
+export const retrieveSession = async (sessionID) => {
+    try {
+        const response = await axios.get('/api/getSession', { params: {sessionID} });
+
+        return response.data;
+    } catch(err){
+        console.error('Error when sending message', err);
+    }
+}
