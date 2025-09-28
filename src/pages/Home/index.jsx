@@ -20,6 +20,10 @@ function Home() {
       console.log(err);
     }
   }
+  
+  function handleFeedbackHistoryNavigation(){
+    navigate('/feedback-history');
+  }
 
   useEffect(() => {
     // handleCreateSession();
@@ -29,8 +33,9 @@ function Home() {
   return (
     <div className='container'>
       <div className='form'>
-        <h1>Bem vindo a página de Feedback</h1>
-        <button onClick={handleCreateSession}>Abrir sessão de chat</button>
+        <h1>Welcome to HungryFood's Feedback Page</h1>
+        <button onClick={handleCreateSession}>Open chat ticket</button>
+        <button onClick={handleFeedbackHistoryNavigation}>See feedbacks</button>
       </div>
     </div>
   )

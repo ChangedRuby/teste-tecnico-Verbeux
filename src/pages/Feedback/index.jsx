@@ -41,7 +41,7 @@ function FeedbackPage() {
   */
 
 
-    
+
 
   function formatSingleMessageResponse(apiResponse) {
     const messageParts = apiResponse.response.map((part) => {
