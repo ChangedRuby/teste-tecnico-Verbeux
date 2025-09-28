@@ -20,7 +20,7 @@ async function handler(req, res) {
     }
 
     try {
-        const { feedbackText, type, sessionID } = req.body;
+        const { feedbackText, feedbackType, sessionID } = req.body;
 
         if (!feedbackText) {
             return res.status(400).json({ message: 'message paremeter is required' });
@@ -28,7 +28,7 @@ async function handler(req, res) {
 
         const newFeedback = {
             message: feedbackText,
-            feedbackType: type,
+            feedbackStatus: feedbackType,
             sessionID: sessionID || null,
             messageDate: new Date(),
         };
