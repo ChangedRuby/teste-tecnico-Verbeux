@@ -10,6 +10,15 @@ h1 {
   font-size: 32px;
 }
 
+footer {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  background-color: #2E2D4E;
+  color: #fff;
+  padding: 10px 0px;
+}
+
 .form {
   display: flex;
   flex-direction: column;

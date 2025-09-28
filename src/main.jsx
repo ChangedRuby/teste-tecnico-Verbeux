@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
-import FeedbackPage from './pages/Feedback'
+import FeedbackPage from './pages/FeedbackPage'
 import Home from './pages/Home'
 import FeedbackHistory from './pages/FeedbackHistory'
 

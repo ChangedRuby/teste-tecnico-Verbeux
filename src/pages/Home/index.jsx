@@ -37,6 +37,7 @@ function Home() {
         <button onClick={handleCreateSession}>Open chat ticket</button>
         <button onClick={handleFeedbackHistoryNavigation}>See feedbacks</button>
       </div>
+      <footer>Copyright Gustavo Macêdo</footer>
     </div>
   )
 }

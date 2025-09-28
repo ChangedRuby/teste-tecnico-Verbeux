@@ -13,15 +13,15 @@ function FeedbackHistory() {
   async function handleFeedbacks(db) {
     try {
       const feedbacksQuery = query(collection(db, "feedbacks"), orderBy("messageDate", "desc"));
-  
+
       const querySnapshot = await getDocs(feedbacksQuery);
-  
+
       const positiveData = [];
       const negativeData = [];
-  
+
       querySnapshot.forEach((doc) => {
         // console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
-  
+
         // separates the itens from doc.data to the new JSON with doc.id
         const feedback = { id: doc.id, ...doc.data() };
         if (feedback.feedbackStatus == "POSITIVE") {
@@ -50,7 +50,7 @@ function FeedbackHistory() {
   }, [])
 
   useEffect(() => {
-    console.log(positiveFeedbacks);
+    // console.log(positiveFeedbacks);
   }, [positiveFeedbacks])
 
 
@@ -58,28 +58,31 @@ function FeedbackHistory() {
 
   return (
     <div className='container'>
-      <div className='messagesHolder'>
-        <h1>Positive Feedback History</h1>
-        {positiveFeedbacks.map((feedback, i) => (
-          <div key={feedback.id} className='messageCard'>
-            <div>
-              <p>{feedback.message}</p>
-              <small>{`${feedback.messageDate?.toDate().toLocaleString('pt-BR')}`}</small>
+      <h1>Feedback History</h1>
+      <div className='feedbacksHolder'>
+        <div className='messagesHolder'>
+          <h1>Positive Feedback History</h1>
+          {positiveFeedbacks.map((feedback, i) => (
+            <div key={feedback.id} className='messageCard'>
+              <div>
+                <p>{feedback.message}</p>
+                <small>{`${feedback.messageDate?.toDate().toLocaleString('pt-BR')}`}</small>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <div className='messagesHolder'>
-        <h1>Negative Feedback History</h1>
-        {negativeFeedbacks.map((feedback, i) => (
-          <div key={feedback.id} className='messageCard'>
-            <div>
-              <p>{feedback.message}</p>
-              <small>{`${feedback.messageDate?.toDate().toLocaleString('pt-BR')}`}</small>
+        <div className='messagesHolder'>
+          <h1>Negative Feedback History</h1>
+          {negativeFeedbacks.map((feedback, i) => (
+            <div key={feedback.id} className='messageCard'>
+              <div>
+                <p>{feedback.message}</p>
+                <small>{`${feedback.messageDate?.toDate().toLocaleString('pt-BR')}`}</small>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )

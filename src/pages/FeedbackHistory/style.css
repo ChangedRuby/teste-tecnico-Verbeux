@@ -1,8 +1,25 @@
 .container {
   display: flex;
   align-items: center;
-  padding-top: 50px;
+  justify-content: center;
+  text-align: center;
   flex-direction: column;
+  padding-top: 50px;
+}
+
+.container h1 {
+  font-size: 32px;
+  width: 100%;
+  background-color: #2E2D4E;
+  padding: 10px 10px;
+}
+
+.feedbacksHolder {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  padding-top: 50px;
+  flex-direction: row;
 }
 
 h1 {
@@ -59,12 +76,15 @@ form {
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 80%;
+  width: 45%;
+  height: 100%;
+  max-width: 45%;
   border-radius: 10px;
   padding: 20px 20px;
+  margin: 0px 10px;
   background-color: #2e2d4e3a;
 
-  & h1{
+  & h1 {
     font-size: 32px;
     width: 100%;
     background-color: #2E2D4E;
@@ -79,10 +99,11 @@ form {
   align-items: center;
   justify-content: space-between;
   background-color: #2E2D4E;
+  width: 80%;
+  max-width: 80%;
   margin: 10px;
   padding: 10px;
   border-radius: 10px;
-  max-width: 80%;
 
   & p {
     color: #fff;
