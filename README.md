@@ -21,3 +21,4 @@ Create .env document with 'API_KEY: your-verboo-api-key'
 npm install
 vercel dev
 ```
+Login to Vercel and follow the setup steps.
