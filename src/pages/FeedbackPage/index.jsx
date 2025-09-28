@@ -197,14 +197,14 @@ function FeedbackPage() {
   return (
     <div className='container'>
       <form>
-        <h1>Sugerir Feedback</h1>
+        <h1>Give Feedback</h1>
         <input name='mensagem' type='text' placeholder='Message' ref={inputMessage}></input>
-        <button type='button' onClick={() => sendFeedback(inputMessage.current.value)}>Enviar</button>
-        <p>Chat criado com id: {sessionID}</p>
+        <button type='button' onClick={() => sendFeedback(inputMessage.current.value)}>Send</button>
+        <p>Chat created with ID: {sessionID}</p>
       </form>
 
       <div className='messagesHolder'>
-        <h1>Conversa</h1>
+        <h1>Chat</h1>
         {messages.map((msg, i) => (
           <div key={i} className='messageCard'>
             <div>
@@ -224,6 +224,7 @@ function FeedbackPage() {
           </div>
         ))}
       </div>
+      <footer>&copy; 2025 Gustavo Macêdo. All rights reserved.</footer>
     </div>
   )
 }

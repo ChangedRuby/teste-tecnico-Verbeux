@@ -18,6 +18,7 @@
   display: flex;
   align-items: baseline;
   justify-content: center;
+  margin-bottom: 50px;
   padding-top: 50px;
   flex-direction: row;
 }
@@ -25,6 +26,15 @@
 h1 {
   color: #fff;
   font-size: 32px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background-color: #2E2D4E;
+  color: #fff;
+  padding: 10px 0px;
 }
 
 form {

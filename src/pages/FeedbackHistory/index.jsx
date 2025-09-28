@@ -84,6 +84,7 @@ function FeedbackHistory() {
           ))}
         </div>
       </div>
+      <footer>&copy; 2025 Gustavo Macêdo. All rights reserved.</footer>
     </div>
   )
 }
