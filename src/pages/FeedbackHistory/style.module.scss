@@ -19,7 +19,7 @@
   align-items: baseline;
   justify-content: center;
   margin-bottom: 50px;
-  padding-top: 50px;
+  padding-top: 40px;
   flex-direction: row;
 }
 
@@ -34,50 +34,21 @@ h1 {
   width: 100%;
   background-color: #2E2D4E;
   color: #fff;
+  text-align: center;
   padding: 10px 0px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  padding: 30px;
-  border-radius: 10px;
+.back {
+  border-radius: 30px;
   background-color: #2E2D4E;
-  max-width: 40%;
-  width: 400px;
-  margin-bottom: 20px;
-
-  & button {
-    border-radius: 30px;
-    background-color: #8B8AE1;
-    height: 40px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    color: #fff;
-    font-size: 14px;
-  }
-
-  & button:hover {
-    opacity: 0.8;
-  }
-
-  & input {
-    border: 1px solid #48456C;
-    border-radius: 30px;
-    padding-left: 10px;
-    height: 40px;
-    background-color: #363653;
-    color: #fff;
-    font-size: 16px;
-    outline: 10px;
-  }
-
-  & p {
-    color: #fff;
-    font-size: 8px;
-  }
+  margin-top: 10px;
+  width: 80px;
+  height: 40px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
 }
 
 .messagesHolder {

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import styles from './style.module.scss'
 import Trash from '../../assets/react.svg'
 import handleFeedback from '../../services/oneshotService.js'
@@ -25,7 +25,7 @@ function FeedbackPage() {
   // }
   console.log("SessionID: " + sessionID);
 
-
+  const navigate = useNavigate();
 
 
   /*
@@ -197,6 +197,7 @@ function FeedbackPage() {
   return (
     <div className={styles.container}>
       <form>
+        <button className={styles.back} onClick={() => navigate('/')}>Back</button>
         <h1>Give Feedback</h1>
         <input name='mensagem' type='text' placeholder='Message' ref={inputMessage}></input>
         <button type='button' onClick={() => sendFeedback(inputMessage.current.value)}>Send</button>

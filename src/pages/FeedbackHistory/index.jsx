@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { collection, query, orderBy, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebaseConfig'
 import styles from './style.module.scss'
@@ -9,6 +9,7 @@ function FeedbackHistory() {
   const [positiveFeedbacks, setPositiveFeedbacks] = useState([]);
   const [negativeFeedbacks, setNegativeFeedbacks] = useState([]);
 
+  const navigate = useNavigate();
 
   async function handleFeedbacks(db) {
     try {
@@ -59,6 +60,7 @@ function FeedbackHistory() {
   return (
     <div className={styles.container}>
       <h1>Feedback History</h1>
+      <button className={styles.back} onClick={() => navigate('/')}>Back</button>
       <div className={styles.feedbacksHolder}>
         <div className={styles.messagesHolder}>
           <h1>Positive Feedback History</h1>

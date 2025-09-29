@@ -16,12 +16,15 @@ h1 {
   width: 100%;
   background-color: #2E2D4E;
   color: #fff;
+  text-align: center;
   padding: 10px 0px;
 }
 
 form {
   display: flex;
   flex-direction: column;
+  position: relative;
+  text-align: center;
   gap: 30px;
   padding: 30px;
   border-radius: 10px;
@@ -59,6 +62,14 @@ form {
   & p {
     color: #fff;
     font-size: 8px;
+  }
+
+  & .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    background-color: #2E2D4E;
   }
 }
 
