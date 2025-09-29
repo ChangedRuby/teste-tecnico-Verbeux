@@ -196,7 +196,7 @@ function FeedbackPage() {
 
   return (
     <div className={styles.container}>
-      <form>
+      <form className={styles.form}>
         <button className={styles.back} onClick={() => navigate('/')}>Back</button>
         <h1>Give Feedback</h1>
         <input name='mensagem' type='text' placeholder='Message' ref={inputMessage}></input>

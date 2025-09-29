@@ -20,7 +20,7 @@ h1 {
   padding: 10px 0px;
 }
 
-form {
+.form {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -29,6 +29,7 @@ form {
   padding: 30px;
   border-radius: 10px;
   background-color: #2E2D4E;
+  min-width: 98%;
   max-width: 40%;
   width: 400px;
   margin-bottom: 20px;
@@ -79,6 +80,7 @@ form {
   align-items: center;
   justify-content: center;
   text-align: center;
+  min-width: 98%;
   width: 80%;
   border-radius: 10px;
   padding: 20px 20px;
@@ -102,6 +104,7 @@ form {
   margin: 10px;
   padding: 10px;
   border-radius: 10px;
+  min-width: 90%;
   max-width: 80%;
 
   & p {
