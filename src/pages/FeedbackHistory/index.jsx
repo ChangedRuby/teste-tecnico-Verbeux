@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { collection, query, orderBy, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebaseConfig'
-import './style.css'
+import styles from './style.module.scss'
 
 function FeedbackHistory() {
 
@@ -57,13 +57,13 @@ function FeedbackHistory() {
 
 
   return (
-    <div className='container'>
+    <div className={styles.container}>
       <h1>Feedback History</h1>
-      <div className='feedbacksHolder'>
-        <div className='messagesHolder'>
+      <div className={styles.feedbacksHolder}>
+        <div className={styles.messagesHolder}>
           <h1>Positive Feedback History</h1>
           {positiveFeedbacks.map((feedback, i) => (
-            <div key={feedback.id} className='messageCard'>
+            <div key={feedback.id} className={styles.messageCard}>
               <div>
                 <p>{feedback.message}</p>
                 <small>{`${feedback.messageDate?.toDate().toLocaleString('pt-BR')}`}</small>
@@ -72,10 +72,10 @@ function FeedbackHistory() {
           ))}
         </div>
 
-        <div className='messagesHolder'>
+        <div className={styles.messagesHolder}>
           <h1>Negative Feedback History</h1>
           {negativeFeedbacks.map((feedback, i) => (
-            <div key={feedback.id} className='messageCard'>
+            <div key={feedback.id} className={styles.messageCard}>
               <div>
                 <p>{feedback.message}</p>
                 <small>{`${feedback.messageDate?.toDate().toLocaleString('pt-BR')}`}</small>
@@ -84,7 +84,7 @@ function FeedbackHistory() {
           ))}
         </div>
       </div>
-      <footer>&copy; 2025 Gustavo Macêdo. All rights reserved.</footer>
+      <footer className={styles.footer}>&copy; 2025 Gustavo Macêdo. All rights reserved.</footer>
     </div>
   )
 }

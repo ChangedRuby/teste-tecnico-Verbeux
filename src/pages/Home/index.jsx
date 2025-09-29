@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
-import './style.css'
+import styles from './style.module.scss'
 import { createSession, sendMsgToSession } from '../../services/sessionService.js'
 
 function Home() {
@@ -31,13 +31,13 @@ function Home() {
 
 
   return (
-    <div className='container'>
-      <div className='form'>
+    <div className={styles.container}>
+      <div className={styles.form}>
         <h1>Welcome to HungryFood's Feedback Page</h1>
         <button onClick={handleCreateSession}>Open chat ticket</button>
         <button onClick={handleFeedbackHistoryNavigation}>See feedbacks</button>
       </div>
-      <footer>&copy; 2025 Gustavo Macêdo. All rights reserved.</footer>
+      <footer className={styles.footer}>&copy; 2025 Gustavo Macêdo. All rights reserved.</footer>
     </div>
   )
 }

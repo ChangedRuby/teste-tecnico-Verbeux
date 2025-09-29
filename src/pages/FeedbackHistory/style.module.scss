@@ -4,7 +4,7 @@
   justify-content: center;
   text-align: center;
   flex-direction: column;
-  padding-top: 50px;
+  padding-top: 0px;
 }
 
 .container h1 {
@@ -28,8 +28,8 @@ h1 {
   font-size: 32px;
 }
 
-footer {
-  position: fixed;
+.footer {
+  position: relative;
   bottom: 0px;
   width: 100%;
   background-color: #2E2D4E;

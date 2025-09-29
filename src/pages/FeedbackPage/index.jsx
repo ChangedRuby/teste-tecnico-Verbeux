@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import './style.css'
+import styles from './style.module.scss'
 import Trash from '../../assets/react.svg'
 import handleFeedback from '../../services/oneshotService.js'
 import { createSession, sendMsgToSession, retrieveSession } from '../../services/sessionService.js'
@@ -195,7 +195,7 @@ function FeedbackPage() {
 
 
   return (
-    <div className='container'>
+    <div className={styles.container}>
       <form>
         <h1>Give Feedback</h1>
         <input name='mensagem' type='text' placeholder='Message' ref={inputMessage}></input>
@@ -203,10 +203,10 @@ function FeedbackPage() {
         <p>Chat created with ID: {sessionID}</p>
       </form>
 
-      <div className='messagesHolder'>
+      <div className={styles.messagesHolder}>
         <h1>Chat</h1>
         {messages.map((msg, i) => (
-          <div key={i} className='messageCard'>
+          <div key={i} className={styles.messageCard}>
             <div>
               {msg.parts.map((singleData, i) => {
                 if (singleData.type == "imageV2") {
@@ -224,7 +224,7 @@ function FeedbackPage() {
           </div>
         ))}
       </div>
-      <footer>&copy; 2025 Gustavo Macêdo. All rights reserved.</footer>
+      <footer className={styles.footer}>&copy; 2025 Gustavo Macêdo. All rights reserved.</footer>
     </div>
   )
 }
